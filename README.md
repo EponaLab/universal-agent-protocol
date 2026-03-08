@@ -2,6 +2,13 @@
 
 **A proposal for transforming the Agent Client Protocol (ACP) into a truly universal copilot/agent protocol by integrating Model Context Protocol (MCP) for bidirectional tool invocation.**
 
+**This proposal analyzes three complementary protocols:**
+- **ACP** (Agent Client Protocol) - Communication layer
+- **MCP** (Model Context Protocol) - Tool invocation format
+- **A2UI** (Agent-to-UI) - Visual presentation layer
+
+**And proposes combining ACP + MCP for universal agent-application integration, with A2UI as a complementary presentation layer.**
+
 ---
 
 ## 📋 Table of Contents
@@ -115,6 +122,14 @@ Agent: "Draft follow-up emails for opportunities closing this week"
 ---
 
 ## 📚 What Exists Today
+
+**Three protocols form the foundation of this proposal:**
+
+1. **ACP (Agent Client Protocol)** - Production-ready communication protocol for code editors ↔ agents
+2. **MCP (Model Context Protocol)** - Production-ready tool definition and invocation format
+3. **A2UI (Agent-to-UI)** - Declarative UI rendering protocol (OpenClaw implementation)
+
+Each solves different aspects of agent-application integration. This proposal shows how combining them creates a universal solution.
 
 ### Agent Client Protocol (ACP)
 
