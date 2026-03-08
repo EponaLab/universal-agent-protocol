@@ -241,7 +241,7 @@ graph TB
     style Agent fill:#f3e5f5
 ```
 
-## Comparison: ACP vs ACP+MCP vs A2UI
+## Comparison: ACP vs ACP+MCP vs AG-UI
 
 ```mermaid
 graph TB
@@ -263,17 +263,17 @@ graph TB
             ACPM5[MCP Integration]
         end
         
-        subgraph "A2UI"
-            A2UI1[WebView/Canvas]
-            A2UI2[Declarative UI]
-            A2UI3[Component Based]
-            A2UI4[Visual Output]
+        subgraph "AG-UI"
+            AGUI1[Event-based]
+            AGUI2[Agent State]
+            AGUI3[UI Rendering]
+            AGUI4[User-facing Apps]
         end
     end
     
     style ACP1 fill:#bbdefb
     style ACPM1 fill:#c5e1a5
-    style A2UI1 fill:#ffccbc
+    style AGUI1 fill:#ffccbc
 ```
 
 ## Complete System Architecture
@@ -286,8 +286,8 @@ graph TB
     end
     
     subgraph "Presentation Layer (Optional)"
-        A2UI[A2UI Protocol]
-        Canvas[Canvas/WebView]
+        AGUI[AG-UI or Similar]
+        Canvas[UI Components]
         Forms[Forms & Dialogs]
     end
     
@@ -319,9 +319,9 @@ graph TB
     User --> UI
     UI --> ACPC
     
-    ACPC --> A2UI
-    A2UI --> Canvas
-    A2UI --> Forms
+    ACPC --> AGUI
+    AGUI --> Canvas
+    AGUI --> Forms
     
     ACPC --> ToolReg
     ToolReg --> Security
@@ -343,7 +343,7 @@ graph TB
     style User fill:#e1f5fe
     style ACPC fill:#fff3e0
     style ACPS fill:#f3e5f5
-    style A2UI fill:#ede7f6
+    style AGUI fill:#ede7f6
     style LLM fill:#fff9c4
 ```
 

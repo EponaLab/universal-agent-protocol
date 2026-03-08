@@ -134,17 +134,20 @@ Agents can retry with adjusted parameters if `retryable: true`.
 
 ## Comparison Questions
 
-### ACP vs MCP vs A2UI?
+### ACP vs MCP vs AG-UI?
 
-**Different layers:**
+**Different protocols for different purposes:**
 
 | Protocol | Layer | Purpose |
 |----------|-------|---------|
-| **ACP** | Communication | Agent ↔ Client messages |
-| **MCP** | Tool Format | Capability definitions |
-| **A2UI** | Presentation | Agent → UI rendering |
+| **ACP** | Communication | IDE ↔ Agent (code editing) |
+| **MCP** | Tool/Data | Agent ↔ Tools & Data |
+| **AG-UI** | UI/UX | Agent ↔ User-facing Apps |
 
-You need ACP+MCP for logic, optionally A2UI for visual output.
+**This proposal:** Extend ACP with MCP-style tool invocation to make it universal (any app type).
+
+**AG-UI** focuses on user-facing copilot experiences with rich UI.
+**ACP+MCP** focuses on capability exposure for any application (including CLIs, servers, non-UI tools).
 
 ### Why not just extend MCP?
 
@@ -236,7 +239,7 @@ Essentially: **everything**.
 - HTTP/REST (works on mobile)
 - IPC (native mobile apps)
 
-A2UI already works on iOS/Android (OpenClaw).
+AG-UI and similar protocols work on mobile platforms.
 
 ### Can this work in the browser?
 
@@ -423,7 +426,7 @@ Security is a priority, not an afterthought.
 This proposal emerged from a conversation about making ACP universal by integrating MCP for tool invocation. It synthesizes ideas from:
 - ACP (Zed Industries)
 - MCP (Anthropic)
-- A2UI (OpenClaw)
+- AG-UI (CopilotKit)
 - Language Server Protocol pattern
 
 ### How accurate is this?
