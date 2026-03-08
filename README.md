@@ -2,12 +2,12 @@
 
 **A proposal for transforming the Agent Client Protocol (ACP) into a truly universal copilot/agent protocol by integrating Model Context Protocol (MCP) for bidirectional tool invocation.**
 
-**This proposal analyzes three complementary protocols:**
-- **ACP** (Agent Client Protocol) - Communication layer
-- **MCP** (Model Context Protocol) - Tool invocation format
-- **A2UI** (Agent-to-UI) - Visual presentation layer
+**This proposal analyzes existing agentic protocols:**
+- **ACP** (Agent Client Protocol) - IDE ↔ agent communication for code editing
+- **MCP** (Model Context Protocol) - Agent ↔ tools & data connections
+- **AG-UI** (Agent-User Interaction) - Agent ↔ user-facing application protocol
 
-**And proposes combining ACP + MCP for universal agent-application integration, with A2UI as a complementary presentation layer.**
+**And proposes:** Extending ACP with MCP-style tool invocation to create a universal agent-application protocol, positioning it alongside AG-UI in the agentic ecosystem.
 
 ---
 
@@ -20,7 +20,7 @@
 5. [Architecture](#architecture)
 6. [Use Cases](#use-cases)
 7. [Implementation Guide](#implementation-guide)
-8. [Comparison with A2UI](#comparison-with-a2ui)
+8. [Comparison with AG-UI](#comparison-with-ag-ui)
 9. [Future Vision](#future-vision)
 10. [References](#references)
 
@@ -123,13 +123,13 @@ Agent: "Draft follow-up emails for opportunities closing this week"
 
 ## 📚 What Exists Today
 
-**Three protocols form the foundation of this proposal:**
+**The agentic protocol ecosystem includes:**
 
-1. **ACP (Agent Client Protocol)** - Production-ready communication protocol for code editors ↔ agents
-2. **MCP (Model Context Protocol)** - Production-ready tool definition and invocation format
-3. **A2UI (Agent-to-UI)** - Declarative UI rendering protocol (OpenClaw implementation)
+1. **ACP (Agent Client Protocol)** - Production-ready, code editor ↔ agent communication
+2. **MCP (Model Context Protocol)** - Production-ready, agent ↔ tools & data connections
+3. **AG-UI (Agent-User Interaction)** - Production-ready, agent ↔ user-facing application protocol
 
-Each solves different aspects of agent-application integration. This proposal shows how combining them creates a universal solution.
+Each solves different aspects of agent integration. This proposal extends ACP with MCP-style tool invocation to make it domain-agnostic and universal.
 
 ### Agent Client Protocol (ACP)
 
@@ -204,31 +204,42 @@ Each solves different aspects of agent-application integration. This proposal sh
 - No standard for client-side application integration
 - Not designed for interactive application control
 
-### A2UI (Agent-to-UI)
+### AG-UI (Agent-User Interaction)
 
-**Status:** ✅ **Implemented in OpenClaw**
+**Status:** ✅ **Production-Ready**
 
 **What it is:**
-- Declarative UI rendering protocol
-- Agents send UI structures to render on devices
-- One-way: Agent → UI
+- Open, event-based protocol for connecting agents to user-facing applications
+- Bidirectional: Agent ↔ User Interface
+- Part of the agentic protocol ecosystem alongside MCP and A2A
 
 **Core Features:**
-- Component-based (Column, Row, Text, Button, etc.)
-- JSONL format
-- WebView/Canvas rendering
-- Mobile-friendly (iOS/Android)
+- Agent state management
+- Real-time streaming
+- Agent actions and events
+- UI rendering (including generative UI)
+- Function calling / tool use integration
+- Works with popular frameworks (React, Next.js, etc.)
 
-**Use Cases:**
-- ✅ Agent-generated interfaces
-- ✅ Progress indicators
-- ✅ Form collection
-- ✅ Results display
+**Resources:**
+- Website: https://docs.ag-ui.com
+- Maintained by: CopilotKit
+- Partners: LangGraph, CrewAI, PydanticAI, and many more
+- Open source and community-driven
 
-**Scope:**
-- **Different layer** than ACP/MCP
-- Focuses on visual output, not capability invocation
-- Complementary to logic layer protocols
+**Current Use Cases:**
+- ✅ Chatbots and copilots in applications
+- ✅ In-app AI assistants
+- ✅ Agentic workflows with UI
+- ✅ Real-time agent state visualization
+
+**How It Differs:**
+- **AG-UI:** Agent ↔ user-facing application (bidirectional, events, state)
+- **ACP:** IDE ↔ coding agent (stdio, file operations)
+- **MCP:** Agent ↔ tools/data (capability invocation)
+
+**Complementary to This Proposal:**
+AG-UI focuses on user-facing applications with rich state management and UI rendering. This proposal extends ACP to become domain-agnostic for ANY application type (including non-UI use cases like CLIs, servers, etc.).
 
 ---
 
@@ -1010,79 +1021,96 @@ acpClient.on("invoke_tool", async (request) => {
 
 ---
 
-## 🔄 Comparison with A2UI
+## 🔄 Comparison with AG-UI
 
-### Different Layers, Complementary Purposes
+### Different Focus, Complementary Purposes
 
-| Aspect | **ACP + MCP** | **A2UI** |
-|--------|---------------|----------|
-| **Purpose** | Logic & capability invocation | Visual presentation |
-| **Direction** | Bidirectional | One-way (agent → UI) |
-| **Layer** | Application logic | Presentation |
-| **Format** | JSON-RPC style | Declarative components |
-| **Use Case** | "What can you do?" | "What should I show?" |
+| Aspect | **ACP + MCP (This Proposal)** | **AG-UI** |
+|--------|-------------------------------|-----------|
+| **Purpose** | IDE/tool integration, capability invocation | User-facing app integration, AI copilots |
+| **Direction** | Bidirectional (tool calls) | Bidirectional (events + state) |
+| **Layer** | Application capabilities | UI/UX + agent state |
+| **Format** | JSON-RPC style (stdio) | Event-based (WebSocket/HTTP) |
+| **Focus** | "What can the app do?" | "How does agent interact with user?" |
+| **Target** | Any application type (IDE, CLI, server, etc.) | User-facing applications with UI |
 
-### Why Both Are Needed
+### When to Use Each
 
-**ACP + MCP handles:**
-- Agent ↔ application communication
-- Tool discovery and invocation
-- Data operations
-- Domain-specific actions
+**Use ACP + MCP for:**
+- IDE integrations (VS Code, IntelliJ, Vim)
+- CLI tools and automation
+- Server-side agent workflows
+- Non-UI applications
+- Deep app capability exposure
+- Domain-agnostic tool invocation
 
-**A2UI handles:**
-- Agent → user visual communication
-- Progress indicators
-- Form collection
-- Rich result display
-- Interactive UI generation
+**Use AG-UI for:**
+- In-app AI copilots and chatbots
+- User-facing assistants
+- Rich UI experiences
+- Real-time agent state visualization
+- React/Next.js applications
+- Generative UI
 
-### Complete Stack
+**Use Both Together:**
+Many applications could benefit from both:
+- **AG-UI** for the user-facing copilot interface
+- **ACP + MCP** for deep integration with application capabilities
+
+### Ecosystem Positioning
 
 ```
-┌──────────────────────────────────────────┐
-│  A2UI (Presentation Layer)               │
-│  • Declarative UI rendering              │
-│  • Progress & status                     │
-│  • Form collection                       │
-│  • Result visualization                  │
-└──────────────────────────────────────────┘
-              ↕ (separate concern)
-┌──────────────────────────────────────────┐
-│  ACP + MCP (Logic Layer)                 │
-│  • Tool invocation                       │
-│  • Capability discovery                  │
-│  • Data operations                       │
-│  • Application control                   │
-└──────────────────────────────────────────┘
+┌─────────────────────────────────────────────┐
+│  Agentic Protocol Ecosystem                 │
+│                                             │
+│  ┌─────────────┐  ┌──────────┐  ┌────────┐│
+│  │   AG-UI     │  │   MCP    │  │  A2A   ││
+│  │  Agent ↔ UI │  │Agent↔Tool│  │Agent↔  ││
+│  │             │  │          │  │Agent   ││
+│  └─────────────┘  └──────────┘  └────────┘│
+│                                             │
+│  ┌───────────────────────────────────────┐ │
+│  │  ACP (current)                        │ │
+│  │  IDE ↔ Coding Agent                  │ │
+│  └───────────────────────────────────────┘ │
+│                                             │
+│  ┌───────────────────────────────────────┐ │
+│  │  ACP + MCP (proposed)                 │ │
+│  │  Any App ↔ Agent (universal)         │ │
+│  └───────────────────────────────────────┘ │
+└─────────────────────────────────────────────┘
 ```
 
 ### Real-World Integration
 
-**Example: Figma Copilot with Both Layers**
+**Example: Design Tool with Both Protocols**
 
 ```typescript
-// User prompt
-"Create a dashboard with sales chart and KPIs"
+// AG-UI handles user-facing copilot
+<CopilotKit>
+  <CopilotChat />  // User types: "Create a dashboard"
+</CopilotKit>
 
-// Logic Layer (ACP + MCP)
-Agent → App: invoke_tool("query_sales_data")
-App → Agent: {data: [...]}
-Agent → App: invoke_tool("create_frame", {width: 1200, height: 800})
-Agent → App: invoke_tool("create_chart", {type: "line", data: [...]})
+// Behind the scenes: Agent uses ACP+MCP to control Figma
+Agent → Figma (ACP+MCP): invoke_tool("create_frame")
+Agent → Figma (ACP+MCP): invoke_tool("add_chart")
+Agent → Figma (ACP+MCP): invoke_tool("apply_layout")
 
-// Presentation Layer (A2UI) - parallel
-Agent → UI: {render: ProgressBar("Creating dashboard... 50%")}
-Agent → UI: {render: StatusCard("Chart created ✓")}
-Agent → UI: {render: CompletionCard("Dashboard ready!")}
-
-// Result: Dashboard created + user sees progress
+// AG-UI shows progress to user
+Agent → UI (AG-UI): Stream progress updates
+Agent → UI (AG-UI): Show preview of created design
 ```
 
-**Key Insight:** 
-- Use **ACP+MCP** when agent needs to **DO** something
-- Use **A2UI** when agent needs to **SHOW** something
-- They work together but solve different problems
+### Key Insight
+
+- **AG-UI** solves the user interaction problem (chatbots, copilots, UI)
+- **ACP + MCP** solves the capability exposure problem (app can do X, Y, Z)
+- **MCP** solves the tool/data connection problem (agent accesses external resources)
+
+**They're complementary, not competitive.** A complete agent-application system might use all three:
+- AG-UI for user-facing AI features
+- ACP+MCP for deep application control
+- MCP for accessing external tools and data
 
 ---
 
@@ -1178,10 +1206,17 @@ Agent → UI: {render: CompletionCard("Dashboard ready!")}
 - TypeScript SDK: https://github.com/modelcontextprotocol/typescript-sdk
 - Server Repository: https://github.com/modelcontextprotocol/servers
 
-**OpenClaw (A2UI Implementation):**
+**AG-UI (Agent-User Interaction):**
+- Website: https://docs.ag-ui.com
+- Introduction: https://docs.ag-ui.com/introduction
+- Maintained by: CopilotKit
+- Partners: LangGraph, CrewAI, PydanticAI
+
+**OpenClaw:**
 - Documentation: https://docs.openclaw.ai
 - GitHub: https://github.com/openclaw/openclaw
 - ACP Integration: https://docs.openclaw.ai/cli/acp
+- Implements declarative UI protocol (similar concepts to A2UI spec)
 
 ### Related Work
 
